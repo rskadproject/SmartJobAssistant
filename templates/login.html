@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Job Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="container" style="max-width: 400px; margin-top: 10vh;">
+        <header style="text-align: center; margin-bottom: 2rem;">
+            <div class="logo">SmartJob<span>AI</span></div>
+            <p>Sign in to access your dashboard</p>
+        </header>
+
+        <div class="glass-card">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="input-field" required placeholder="you@example.com">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="input-field" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Sign In</button>
+            </form>
+            <div id="error-msg" style="color: #ef4444; margin-top: 10px; font-size: 0.9rem; text-align: center;"></div>
+        </div>
+
+        <p style="text-align: center; margin-top: 20px; color: #6b7280;">
+            Don't have an account? <a href="/signup"
+                style="color: var(--accent-color); text-decoration: none; font-weight: 600;">Sign up</a>
+        </p>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+        // Fetch config from backend to avoid exposing keys in source (optional, but cleaner)
+        // For simplicity, we'll fetch them from a helper endpoint or inject via template.
+        // Or we can just paste them here since they are anon keys (safe for public).
+
+        // However, standard practice with Flask is to pass via template context or an API.
+        // Let's use a quick fetch to a new /config endpoint in app.py
+
+        async function init() {
+            const res = await fetch('/config');
+            const config = await res.json();
+
+            const supabase = createClient(config.supabase_url, config.supabase_key);
+
+            // Check if already logged in
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                window.location.href = '/';
+                return;
+            }
+
+            const form = document.getElementById('login-form');
+            const errorMsg = document.getElementById('error-msg');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button');
+                btn.disabled = true;
+                btn.textContent = 'Signing in...';
+
+                errorMsg.textContent = '';
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+                if (error) {
+                    errorMsg.textContent = error.message;
+                    btn.disabled = false;
+                    btn.textContent = 'Sign In';
+                } else {
+                    // Successful login
+                    window.location.href = '/';
+                }
+            });
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
