@@ -1,0 +1,389 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+    --bg-color: #f3f4f6;
+    --text-color: #1f2937;
+    --card-bg: #ffffff;
+    --card-border: #e5e7eb;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --accent-color: #4f46e5;
+    /* Indigo-600 */
+    --accent-hover: #4338ca;
+    /* Indigo-700 */
+    --secondary-color: #0ea5e9;
+    /* Sky-500 */
+    --success-color: #10b981;
+    /* Emerald-500 */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    color: #111827;
+    margin-top: 0;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: #4b5563;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 5px;
+}
+
+.logo span {
+    color: var(--accent-color);
+}
+
+.subtitle {
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+
+/* Card Style (Replacing Glass) */
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+/* Forms & Inputs */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    color: #1f2937;
+    font-family: inherit;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    display: inline-block;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+}
+
+.btn-primary:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-outline:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.btn-job {
+    background-color: #e0e7ff;
+    color: var(--accent-color);
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.btn-job:hover {
+    background-color: #c7d2fe;
+}
+
+/* Drop Zone */
+.drop-zone {
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.2s;
+    margin: 20px 0;
+    cursor: pointer;
+    background: #f9fafb;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+    border-color: var(--accent-color);
+    background: #eff6ff;
+}
+
+.drop-zone p {
+    margin: 5px 0;
+    color: #4b5563;
+}
+
+.drop-zone .small {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+
+
+/* Loading Spinner (Simple) */
+.loading {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #6b7280;
+}
+
+.spinner {
+    border: 3px solid #e5e7eb;
+    border-top: 3px solid var(--accent-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Skill Tags */
+.skill-tag {
+    display: inline-block;
+    background: #e0e7ff;
+    /* Light indigo */
+    color: var(--accent-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    /* Pill shape */
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 4px;
+    border: 1px solid #c7d2fe;
+    transition: all 0.2s;
+}
+
+.skill-tag:hover {
+    background: #c7d2fe;
+    transform: translateY(-1px);
+}
+
+/* ATS Score */
+.ats-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.circular-chart {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 2.5;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke: var(--success-color);
+    animation: progress 1s ease-out forwards;
+}
+
+.percentage {
+    fill: #374151;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 0.5rem;
+    text-anchor: middle;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #e5e7eb;
+    stroke-width: 3;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    stroke: var(--success-color);
+    /* Green for score */
+    transition: stroke-dasharray 1s ease;
+}
+
+.percentage {
+    fill: #374151;
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 0.5em;
+    text-anchor: middle;
+}
+
+.ats-tips h4 {
+    margin-bottom: 10px;
+    color: #374151;
+}
+
+.ats-tips ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+/* Skill Gaps */
+.gap-item {
+    background: #fef2f2;
+    border-left: 4px solid #ef4444;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.gap-skill-name {
+    font-weight: 700;
+    color: #b91c1c;
+    display: block;
+}
+
+.gap-rec {
+    font-size: 0.9rem;
+    color: #7f1d1d;
+}
+
+/* Helper Classes */
+.hidden {
+    display: none !important;
+}
+
+#file-name {
+
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9rem;
+}
