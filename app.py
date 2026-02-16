@@ -30,10 +30,21 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
 # Supabase Setup
+# Supabase Setup
 from supabase import create_client, Client
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+if not SUPABASE_URL:
+    print("CRITICAL ERROR: SUPABASE_URL is missing from environment", flush=True)
+if not SUPABASE_KEY:
+    print("CRITICAL ERROR: SUPABASE_KEY is missing from environment", flush=True)
+
+try:
+    supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    print("Supabase client initialized successfully", flush=True)
+except Exception as e:
+    print(f"CRITICAL ERROR: Failed to init Supabase: {e}", flush=True)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev_warning_change_me_in_prod')
